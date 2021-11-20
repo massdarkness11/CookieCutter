@@ -75,14 +75,26 @@ module outer()
     {
         difference()
         {
-            offset(r = 1.6)shadow();
+            offset(r = 0.8)shadow();
             offset(r = 0.6)shadow();
+        }
+    }
+}
+module outer2()
+{
+    translate ([0,0,(cutterHeight-0.3)/2])linear_extrude(height = cutterHeight-0.3, center = true)
+    {
+        difference()
+        {
+            offset(r = 1)shadow();
+            offset(r = 0.7)shadow();
         }
     }
 }
 module cutter()
 {
     outer();
+    outer2();
     feet();
     
 }
