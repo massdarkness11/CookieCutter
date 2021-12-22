@@ -103,8 +103,17 @@ threshold = int(input("Desired Threshold between 0 and 225"))
 (thresh, blackAndWhiteImage) = cv2.threshold(result, threshold, 255, cv2.THRESH_BINARY)
 show(blackAndWhiteImage, str(threshold) + " threshold background Image")
 
+img_gray = cv2.cvtColor(blackAndWhiteImage, cv2.COLOR_BGR2GRAY)
+#img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+ret, thresh = cv2.threshold(img_gray, 150, 255, cv2.THRESH_BINARY)
+# visualize the binary image
+cv2.imshow('Binary image', thresh)
+cv2.waitKey(0)
+cv2.imwrite('image_thres1.jpg', thresh)
+cv2.destroyAllWindows()
+
 # detect the contours on the binary image using cv2.CHAIN_APPROX_NONE
-contours, hierarchy = cv2.findContours(image=thresh, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(image=thresh, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_NONE)
 
 # draw contours on the original image
 
